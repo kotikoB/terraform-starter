@@ -53,7 +53,7 @@ resource "aws_security_group" "mtc_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["197.237.29.246/32", "212.22.165.237/32"] # always hard code known source IPs here | remove 2nd IP
+    cidr_blocks = ["197.237.29.246/32", "212.22.165.237/32"] # always hard code known source IPs here for SSH | remove 2nd IP
   }
 
   egress {
