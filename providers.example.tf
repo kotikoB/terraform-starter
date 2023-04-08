@@ -8,7 +8,7 @@ terraform {
 
 # TODO: User aws credentials file instead
 provider "aws" {
-  access_key = "AKIAT34OCEUISZ6DZLC3"
-  secret_key = "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"
+  access_key = "XXXX"
+  secret_key = "XXXX"
   region     = "eu-west-1"
 }

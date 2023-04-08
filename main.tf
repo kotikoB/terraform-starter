@@ -50,10 +50,11 @@ resource "aws_security_group" "mtc_sg" {
   vpc_id      = aws_vpc.mtc_vpc.id
 
   ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["197.237.29.246/32", "212.22.165.237/32"] # always hard code known source IPs here for SSH | remove 2nd IP
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    # cidr_blocks = ["197.237.29.246/32", "212.22.165.237/32"] # always hard code known source IPs here for SSH | remove 2nd IP
+    cidr_blocks = ["212.22.165.237/32"] # always hard code known source IPs here for SSH | remove 2nd IP
   }
 
   egress {
