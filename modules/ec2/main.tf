@@ -18,7 +18,7 @@ resource "aws_instance" "web_server_node" {
   key_name               = aws_key_pair.mtc_auth.key_name #aws_key_pair.mtc_auth.id
   vpc_security_group_ids = var.security_group_ids
   subnet_id              = var.subnet_id
-  user_data              = file("userdata.tpl")
+  user_data              = file("./modules/ec2/userdata.tpl")
 
   root_block_device {
     volume_size = 10
@@ -28,7 +28,7 @@ resource "aws_instance" "web_server_node" {
   # Provisioners have no roll backs incase of failuers, the enite script must be rerun
   # Use ansible instaead
   provisioner "local-exec" {
-    command = templatefile("${var.host_os}-ssh-config.tpl", {
+    command = templatefile("./modules/ec2/${var.host_os}-ssh-config.tpl", {
       hostname     = self.public_ip,
       user         = "ubuntu",
       identityfile = "~/.ssh/mtckey"

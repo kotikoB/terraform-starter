@@ -47,5 +47,6 @@ module "chama_api_server" {
   ec2_ami            = data.aws_ami.chama_ami.id
   security_group_ids = [module.public_security_group_1.instance.id]
   subnet_id          = module.public_subnet.instance.id
+  host_os            = "unix"
 }
 
