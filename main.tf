@@ -42,11 +42,12 @@ module "public_security_group_1" {
   vpc_id = aws_vpc.chama_dev_vpc.id
 }
 
-module "chama_api_server" {
+module "chama_api_server_dev" {
   source             = "./modules/ec2"
   ec2_ami            = data.aws_ami.chama_ami.id
   security_group_ids = [module.public_security_group_1.instance.id]
   subnet_id          = module.public_subnet.instance.id
   host_os            = "unix"
+  tag_name           = "chama_api_server_dev"
 }
 
