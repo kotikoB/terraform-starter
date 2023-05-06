@@ -6,7 +6,6 @@
     container_count: 1
     default_container_name: chama_dev_server
     default_container_image: ubuntu
-    default_container_command: sleep 1
 
   tasks:
     - name: Install aptitude
