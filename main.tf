@@ -78,6 +78,6 @@ module "start_ec2_instances" {
 # Create ansible inventory file from created instances
 resource "local_file" "ansible_inventory" {
   content  = module.chama_api_server_dev.instance.public_ip
-  filename = "ansible_inventory.txt"
+  filename = "_ansible/ansible_inventory.txt"
 }
 
