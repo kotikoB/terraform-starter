@@ -1,35 +1,34 @@
 ---
-name: chama_playbool
-hosts: ansible_inventory
-remote_user: root
-become: true
-vars:
-  container_count: 1
-  default_container_name: chama_dev_server
-  default_container_image: ubuntu
-  default_container_command: sleep 1
+- hosts: inventory.txt
+  remote_user: root
+  become: true
+  vars:
+    container_count: 1
+    default_container_name: chama_dev_server
+    default_container_image: ubuntu
+    default_container_command: sleep 1
 
-tasks:
-  - name: Install aptitude
+  tasks:
+    - name: Install aptitude
       apt:
         name: aptitude
         state: latest
         update_cache: true
 
-  - name: Install required system packages
-    apt:
-      pkg:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - python3-pip
-        - virtualenv
-        - python3-setuptools
-      state: latest
-      update_cache: true
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
 
-  - name: Add Docker GPG apt Key
+    - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
