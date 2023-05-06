@@ -81,3 +81,4 @@ resource "local_file" "ansible_inventory" {
   filename = "_ansible/ansible_inventory.txt"
 }
 
+#TODO: Checkout infracost.io
