@@ -51,6 +51,30 @@ module "chama_api_server_dev" {
   tag_name           = "chama_api_server_dev"
 }
 
+module "stop_ec2_instances" {
+  source              = "github.com/julb/terraform-aws-lambda-auto-start-stop-ec2-instances"
+  name                = "StopEc2Instances"
+  schedule_expression = "cron(0 20 * * ? *)" #Stop server at 7pm
+  action              = "stop"
+  tags                = { "Name" : "stopEc2Instance" }
+  lookup_resource_tag = {
+    key   = "Name"
+    value = "chama_api_server_dev"
+  }
+}
+
+module "start_ec2_instances" {
+  source              = "github.com/julb/terraform-aws-lambda-auto-start-stop-ec2-instances"
+  name                = "StartEc2Instances"
+  schedule_expression = "cron(0 10 * * ? *)" #Start server at 10am
+  action              = "start"
+  tags                = { "Name" : "startEc2Instance" }
+  lookup_resource_tag = {
+    key   = "Name"
+    value = "chama_api_server_dev"
+  }
+}
+
 # Create ansible inventory file from created instances
 resource "local_file" "ansible_inventory" {
   content  = module.chama_api_server_dev.instance.public_ip
