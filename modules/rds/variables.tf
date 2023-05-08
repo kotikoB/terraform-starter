@@ -1,10 +1,37 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-  required_version = ">= 1.4.0"
+variable "identifier" {
+  type = string
+}
+
+variable "engine" {
+  type = string
+}
+
+variable "engine" {
+  type = string
+}
+
+variable "db_user" {
+  type = string
+}
+
+variable "db_name" {
+  type = string
+}
+
+variable "db_password" {
+  type = string
+}
+
+variable "db_maintenance_window" {
+  type = string
+}
+
+variable "db_subnet_group_name" {
+  type = string
+}
+
+variable "vpc_security_group_ids" {
+  type = list(number)
 }
 
 resource "aws_db_instance" "example" {
@@ -25,13 +52,4 @@ resource "aws_db_instance" "example" {
   tags = {
     Name = "example-rds"
   }
-}
-
-resource "aws_security_group" "example" {
-  name_prefix = "example-rds-sg-"
-}
-
-resource "aws_db_subnet_group" "example" {
-  name       = "example-rds-subnet-group"
-  subnet_ids = aws_subnet.example.*.id
 }
