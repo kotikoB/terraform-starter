@@ -44,11 +44,20 @@ module "public_security_group_1" {
 
 module "chama_api_server_dev" {
   source             = "./modules/ec2"
-  ec2_ami            = data.aws_ami.chama_ami.id
+  ec2_ami            = data.aws_ami.default_ami.id
   security_group_ids = [module.public_security_group_1.instance.id]
   subnet_id          = module.public_subnet.subnet_instance.id
   host_os            = "unix"
   tag_name           = "chama_api_server_dev"
+}
+
+module "ansible_configurator" {
+  source             = "./modules/ec2"
+  ec2_ami            = data.aws_ami.default_ami.id
+  security_group_ids = [module.public_security_group_1.instance.id]
+  subnet_id          = module.public_subnet.subnet_instance.id
+  host_os            = "unix"
+  tag_name           = "ansible_configurator"
 }
 
 module "chama_dev_db" {
@@ -57,7 +66,7 @@ module "chama_dev_db" {
   engine                  = "mysql"
   engine_version          = "5.7"
   instance_class          = "db.t2.micro"
-  name                    = "chama-dev-db"
+  db_name                 = "chama-dev-db"
   username                = "chama-dev-db-user"
   password                = "lE+j$fC,>IuVhv7"
   allocated_storage       = 20
@@ -65,7 +74,7 @@ module "chama_dev_db" {
   maintenance_window      = "Mon:00:00-Mon:03:00"
   vpc_security_group_ids  = [aws_vpc.chama_dev_vpc.id]
   tag_name                = "chama_dev_db"
-  subnet_group_name       = module.public_subnet.subnet_instance.id
+  subnet_ids              = [module.public_subnet.subnet_instance.id]
 }
 
 module "stop_ec2_instances" {

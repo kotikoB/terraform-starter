@@ -14,7 +14,7 @@ variable "instance_class" {
   type = string
 }
 
-variable "name" {
+variable "db_name" {
   type = string
 }
 
@@ -39,11 +39,11 @@ variable "maintenance_window" {
 }
 
 variable "vpc_security_group_ids" {
-  type = list(number)
+  type = list(string)
 }
 
-variable "subnet_group_name" {
-  type = string
+variable "subnet_ids" {
+  type = list(string)
 }
 
 variable "tag_name" {

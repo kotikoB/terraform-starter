@@ -1,4 +1,4 @@
-data "aws_ami" "chama_ami" {
+data "aws_ami" "default_ami" {
   most_recent = true
   owners      = ["099720109477"]
   filter {
