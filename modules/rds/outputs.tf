@@ -1,4 +1,4 @@
 output "db_instance" {
-  value       = aws_instance.db_test
+  value       = aws_db_instance.db_test
   description = "ec2 instance contents"
 }
