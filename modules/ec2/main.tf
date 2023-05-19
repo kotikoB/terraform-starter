@@ -13,7 +13,7 @@ resource "aws_key_pair" "mtc_auth" {
 }
 
 resource "aws_instance" "ec2_web_server" {
-  instance_type          = var.instance_type
+  instance_type          = var.instance_type # default = "t3.micro"
   ami                    = var.ec2_ami
   key_name               = aws_key_pair.mtc_auth.key_name #aws_key_pair.mtc_auth.id
   vpc_security_group_ids = var.security_group_ids
