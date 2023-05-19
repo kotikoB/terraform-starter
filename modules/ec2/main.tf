@@ -12,8 +12,8 @@ resource "aws_key_pair" "mtc_auth" {
   public_key = file("~/.ssh/mtckey.pub")
 }
 
-resource "aws_instance" "web_server_node" {
-  instance_type          = "t3.micro" # t3.micro also works in free tier
+resource "aws_instance" "ec2_web_server" {
+  instance_type          = var.instance_type
   ami                    = var.ec2_ami
   key_name               = aws_key_pair.mtc_auth.key_name #aws_key_pair.mtc_auth.id
   vpc_security_group_ids = var.security_group_ids
@@ -37,7 +37,7 @@ resource "aws_instance" "web_server_node" {
   }
 
   tags = {
-    Name = "chama_dev_node"
+    Name = var.tag_name
   }
 }
 

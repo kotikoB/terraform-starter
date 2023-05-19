@@ -6,7 +6,7 @@ terraform {
   }
 }
 
-# TODO: User aws credentials file instead
+# TODO: Use aws credentials file instead
 provider "aws" {
   access_key = "XXXX"
   secret_key = "XXXX"
