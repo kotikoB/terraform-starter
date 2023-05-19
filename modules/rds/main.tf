@@ -7,31 +7,30 @@ terraform {
   required_version = ">= 1.4.0"
 }
 
-resource "aws_db_instance" "example" {
-  identifier              = "example-rds"
-  engine                  = "mysql"
-  engine_version          = "5.7"
-  instance_class          = "db.t2.micro"
-  name                    = "chama-dev-db"
-  username                = "chama-dev-db-user"
-  password                = "lE+j$fC,>IuVhv7"
-  allocated_storage       = 20
-  backup_retention_period = 7
-  maintenance_window      = "Mon:00:00-Mon:03:00"
-  vpc_security_group_ids  = [aws_security_group.example.id]
+resource "aws_db_instance" "db_test" {
+  identifier              = var.identifier
+  engine                  = var.engine
+  engine_version          = var.engine_version
+  instance_class          = var.instance_class
+  name                    = var.name
+  username                = var.username
+  password                = var.password
+  allocated_storage       = var.allocated_storage
+  backup_retention_period = var.backup_retention_period
+  maintenance_window      = var.maintenance_window
+  vpc_security_group_ids  = var.vpc_security_group_ids
 
-  db_subnet_group_name = aws_db_subnet_group.example.name
-
+  db_subnet_group_name = var.subnet_group_name
   tags = {
-    Name = "example-rds"
+    Name = var.tag_name
   }
 }
 
-resource "aws_security_group" "example" {
-  name_prefix = "example-rds-sg-"
-}
+# resource "aws_security_group" "example" {
+#   name_prefix = "example-rds-sg-"
+# }
 
-resource "aws_db_subnet_group" "example" {
-  name       = "example-rds-subnet-group"
-  subnet_ids = aws_subnet.example.*.id
-}
+# resource "aws_db_subnet_group" "example" {
+#   name       = "example-rds-subnet-group"
+#   subnet_ids = aws_subnet.example.*.id
+# }

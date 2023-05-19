@@ -6,27 +6,35 @@ variable "engine" {
   type = string
 }
 
-variable "engine" {
+variable "engine_version" {
   type = string
 }
 
-variable "db_user" {
+variable "instance_class" {
   type = string
 }
 
-variable "db_name" {
+variable "name" {
   type = string
 }
 
-variable "db_password" {
+variable "username" {
   type = string
 }
 
-variable "db_maintenance_window" {
+variable "password" {
   type = string
 }
 
-variable "db_subnet_group_name" {
+variable "allocated_storage" {
+  type = number
+}
+
+variable "backup_retention_period" {
+  type = number
+}
+
+variable "maintenance_window" {
   type = string
 }
 
@@ -34,22 +42,10 @@ variable "vpc_security_group_ids" {
   type = list(number)
 }
 
-resource "aws_db_instance" "example" {
-  identifier              = "example-rds"
-  engine                  = "mysql"
-  engine_version          = "5.7"
-  instance_class          = "db.t2.micro"
-  name                    = "chama-dev-db"
-  username                = "chama-dev-db-user"
-  password                = "lE+j$fC,>IuVhv7"
-  allocated_storage       = 20
-  backup_retention_period = 7
-  maintenance_window      = "Mon:00:00-Mon:03:00"
-  vpc_security_group_ids  = [aws_security_group.example.id]
+variable "subnet_group_name" {
+  type = string
+}
 
-  db_subnet_group_name = aws_db_subnet_group.example.name
-
-  tags = {
-    Name = "example-rds"
-  }
+variable "tag_name" {
+  type = string
 }
